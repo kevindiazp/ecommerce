@@ -2,6 +2,7 @@ package com.ecommercesystem.ecommerce;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -16,5 +17,17 @@ public class MvcConfig implements WebMvcConfigurer {
     registry.addViewController("/search_results").setViewName("static/SearchResult/search_result");
     registry.addViewController("/item_details").setViewName("static/ItemDetails/item_details");
     registry.addViewController("/login").setViewName("static/login");
+  }
+
+  @Override
+  public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    registry.addResourceHandler(
+            "/**",
+            "/ItemDetails/**",
+            "/SearchResult/**"
+    ).addResourceLocations(
+            "classpath:/static/ItemDetails",
+            "classpath:/static/",
+            "classpath:/static/SearchResult");
   }
 }

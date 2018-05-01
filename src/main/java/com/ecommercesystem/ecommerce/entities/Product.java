@@ -36,6 +36,17 @@ public class Product {
   @ManyToOne
   private Category category;
 
+  public Product(Integer ID_product, @NotNull String prodName, @NotNull String prodDesc, @NotNull float price, @NotNull String prodBrand, @NotNull Blob prodImage, int prodRating, Category category) {
+    this.ID_product = ID_product;
+    this.prodName = prodName;
+    this.prodDesc = prodDesc;
+    this.price = price;
+    this.prodBrand = prodBrand;
+    this.prodImage = prodImage;
+    this.prodRating = prodRating;
+    this.category = category;
+  }
+
   public Integer getID_product() {
     return ID_product;
   }

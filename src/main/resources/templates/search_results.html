@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
     <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,10 +9,10 @@
     <title>Pasar ITHB</title>
 
    <!-- Bootstrap core CSS -->
-    <link href="static/SearchResult/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap.min.css" th:href="@{/bootstrap.min.css}" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
-    <link href="static/SearchResult/css/shop-homepage.css" rel="stylesheet">
+    <link href="shop-homepage.css" th:href="@{/shop-homepage.css}" rel="stylesheet" type="text/css">
 
   </head>
 
@@ -23,16 +23,17 @@
       <div class="container">
         <a class="navbar-brand" href="../../templates/index.html">Pasar ITHB</a>
         <select class="navbar-toggle">
-          <option value="category">Category</option>
+          <link href="/search_results.html" value="category">Category</link>
           <option value="elektronik">Elektronik</option>
           <option value="games">Games</option>
           <option value="fashion">Fashion</option>
           <option value="food">Food</option>
           <option value="olahraga">Olahraga</option>
         </select>
-        <input class="col-7 form-control mr-sm-2" type="text" name="search" placeholder="Search for Products and Brands">
-        <form action="search_result.html">
-          <input class="navbar-toggler" type="submit" value="Search" />
+        <form method="get" action="/search_results" th:action="@{/search_results}" th:object="${productController}"/>
+          <input th:text="${search}" class="col-5" type="text" id="search" name="search"
+                 placeholder="Search for Products and Brands">
+          <input id="searchButton" class="navbar-toggler" type="submit" value="search"/>
         </form>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -60,7 +61,7 @@
           <h1 class="my-4">You have search for: </h1>
             
             <!-- Page Content 2 -->
-            <h1 a href="#"></h1>
+            <h1></h1>
           <div class="list-group">
             <a class="list-group-item" >Category</a>
             <a href="#" class="list-group-item">Elektronik</a>
@@ -96,14 +97,14 @@
 
             <div class="col-lg-4 col-md-6 mb-4">
               <div class="card h-20">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                <a href="#"><img class="card-img-top" src="/prodImage" th:src="@{/prodImage}" alt="image"></a>
                 <div class="card-body">
                   <h4 class="card-title">
-                    <a href="#">Nama Barang 1</a>
+                    <a href="/search_results"/>
                   </h4>
-                  <h5>Rp. 2000</h5>
+                  <h5 th:text="${price}"/>
                     Category:
-                  <a href="#" name="prodCategory">Elektronik</a>
+                  <a href="#" th:text="${category_name}" name="prodCategory">Elektronik</a>
                 </div>
                 <div class="card-footer">
                   <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
