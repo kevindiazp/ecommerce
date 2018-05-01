@@ -9,10 +9,10 @@
     <title>Pasar ITHB</title>
 
    <!-- Bootstrap core CSS -->
-    <link href="bootstrap.min.css" th:href="@{/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/bootstrap.min.css}" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
-    <link href="shop-homepage.css" th:href="@{/shop-homepage.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/shop-homepage.css}" rel="stylesheet" type="text/css">
 
   </head>
 
@@ -31,11 +31,12 @@
           <option value="olahraga">Olahraga</option>
         </select>
         <form method="get" action="/search_results" th:action="@{/search_results}" th:object="${productController}"/>
-          <input th:text="${search}" class="col-5" type="text" id="search" name="search"
+          <input th:text="${search}" class="col-8" type="text" id="search" name="search"
                  placeholder="Search for Products and Brands">
           <input id="searchButton" class="navbar-toggler" type="submit" value="search"/>
         </form>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -95,12 +96,12 @@
 
           <div class="row">
 
-            <div class="col-lg-4 col-md-6 mb-4">
+            <div class="col-lg-4 col-md-6 mb-4" th:object="${productController}">
               <div class="card h-20">
                 <a href="#"><img class="card-img-top" src="/prodImage" th:src="@{/prodImage}" alt="image"></a>
                 <div class="card-body">
                   <h4 class="card-title">
-                    <a href="/search_results"/>
+                    <a th:href="@{item_details}" th:text="${prodName}"/>
                   </h4>
                   <h5 th:text="${price}"/>
                     Category:

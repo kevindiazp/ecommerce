@@ -29,20 +29,10 @@
         <option value="olahraga">Olahraga</option>
       </select>
       <form method="get" action="/search_results" th:action="@{/search_results}" th:object="${productController}"/>
-        <input th:text="${search}" class="col-5" type="text" id="search" name="search"
+        <input th:text="${search}" class="col-8" type="text" id="search" name="search"
                placeholder="Search for Products and Brands">
         <input id="searchButton" class="navbar-toggler" type="submit" value="Search"/>
       </form>
-
-      <!--<script type="text/javascript">-->
-        <!--function search_results(){-->
-          <!--var url = document.getElementById("searchButton").value;-->
-          <!--if(value != 'null'){-->
-            <!--window.location=url;-->
-          <!--}-->
-        <!--}-->
-<!--</    </script>-->
-
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
               aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
