@@ -21,7 +21,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lDg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="../../templates/index.html">Pasar ITHB</a>
+        <a class="navbar-brand" href="/">Pasar ITHB</a>
         <select class="navbar-toggle">
           <link href="/search_results.html" value="category">Category</link>
           <option value="elektronik">Elektronik</option>
@@ -31,9 +31,9 @@
           <option value="olahraga">Olahraga</option>
         </select>
         <form method="get" action="/search_results" th:action="@{/search_results}" th:object="${productController}"/>
-          <input th:text="${search}" class="col-8" type="text" id="search" name="search"
+          <input th:text="${search}" class="col-8.5" type="text" id="search" name="search"
                  placeholder="Search for Products and Brands">
-          <input id="searchButton" class="navbar-toggler" type="submit" value="search"/>
+          <input id="searchButton" class="navbar-toggler" type="submit" value="Search"/>
         </form>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +51,7 @@
         </div>
       </div>
     </nav>
-      
+
     <!-- Page Content -->
     <div class="container">
 
@@ -60,7 +60,7 @@
         <div class="col-lg-3">
 
           <h1 class="my-4">You have search for: </h1>
-            
+
             <!-- Page Content 2 -->
             <h1></h1>
           <div class="list-group">
@@ -83,7 +83,7 @@
               <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
               <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             </ol>
-        
+
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="sr-only">Previous</span>
@@ -94,18 +94,18 @@
             </a>
           </div>
 
-          <div class="row">
+          <div class="row" th:object="${productController}" th:src="@{/search_results}">
 
-            <div class="col-lg-4 col-md-6 mb-4" th:object="${productController}">
+            <div class="col-lg-4 col-md-6 mb-4">
               <div class="card h-20">
-                <a href="#"><img class="card-img-top" src="/prodImage" th:src="@{/prodImage}" alt="image"></a>
-                <div class="card-body">
+                <a href="#"><img class="card-img-top" src="/prodImage" th:action="@{/search_results}" th:src="@{/prodImage}" alt="image"></a>
+                <div class="card-body" th:hidden="${ID_product}">
                   <h4 class="card-title">
-                    <a th:href="@{item_details}" th:text="${prodName}"/>
+                    <a text="prodName" th:text="${prodName}"/>
                   </h4>
-                  <h5 th:text="${price}"/>
+                  <h5 text="price" th:text="${price}"/>
                     Category:
-                  <a href="#" th:text="${category_name}" name="prodCategory">Elektronik</a>
+                  <a text="prodName" th:text="${category_name}" name="prodCategory"/>
                 </div>
                 <div class="card-footer">
                   <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>

@@ -16,6 +16,13 @@ public class Category {
   @NotNull
   private String category_name;
 
+  protected Category(){}
+
+  public Category(Integer ID_category, @NotNull String category_name) {
+    this.ID_category = ID_category;
+    this.category_name = category_name;
+  }
+
   public Integer getID_category() {
     return ID_category;
   }

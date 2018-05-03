@@ -2,6 +2,7 @@ package com.ecommercesystem.ecommerce.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.ecommercesystem.ecommerce.entities.Product;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -12,5 +13,5 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
   Optional<Product> findByProdName(String prodName);
-  Optional<Product> findByProdBrand (String prodBrand);
+//  Optional<Product> findByProdBrand (String prodBrand);
 }

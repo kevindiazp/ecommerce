@@ -16,11 +16,11 @@ public class CategoryController {
   @Autowired
   private CategoryRepository categoryRepository;
 
-  @GetMapping(path="/search")
-  public @ResponseBody String getCategory(@RequestParam String category_name){
-    Category category = new Category();
-    category.setCategory_name(category_name);
-    categoryRepository.save(category);
-    return "saved";
-  }
+//  @GetMapping(path="/search")
+//  public @ResponseBody String getCategory(@RequestParam String category_name){
+//    Category category = new Category();
+//    category.setCategory_name(category_name);
+//    categoryRepository.save(category);
+//    return "saved";
+//  }
 }

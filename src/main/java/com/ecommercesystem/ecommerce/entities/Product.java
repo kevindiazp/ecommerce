@@ -3,38 +3,38 @@ package com.ecommercesystem.ecommerce.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.sql.Blob;
 
 @Entity
-@Table(name = "product")
 public class Product {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer ID_product;
 
-  @Column(name = "prodName", length = 50)
   @NotNull
   private String prodName;
 
-  @Column(name = "prodDesc", length = 500)
   @NotNull
   private String prodDesc;
 
-  @Column(name = "price", length = 10)
   @NotNull
   private float price;
 
-  @Column(name = "prodBrand", length = 25)
   @NotNull
   private String prodBrand;
 
   @NotNull
   private Blob prodImage;
-  private int prodRating;
+
+//  @Null
+//  private int prodRating;
 
   @ManyToOne
   private Category category;
+
+  protected Product(){}
 
   public Product(Integer ID_product, @NotNull String prodName, @NotNull String prodDesc, @NotNull float price, @NotNull String prodBrand, @NotNull Blob prodImage, int prodRating, Category category) {
     this.ID_product = ID_product;
@@ -43,7 +43,7 @@ public class Product {
     this.price = price;
     this.prodBrand = prodBrand;
     this.prodImage = prodImage;
-    this.prodRating = prodRating;
+//    this.prodRating = prodRating;
     this.category = category;
   }
 
@@ -95,13 +95,13 @@ public class Product {
     this.prodImage = prodImage;
   }
 
-  public int getProdRating() {
-    return prodRating;
-  }
-
-  public void setProdRating(int prodRating) {
-    this.prodRating = prodRating;
-  }
+//  public int getProdRating() {
+//    return prodRating;
+//  }
+//
+//  public void setProdRating(int prodRating) {
+//    this.prodRating = prodRating;
+//  }
 
   public Category getCategory() {
     return category;
