@@ -5,6 +5,8 @@ import com.ecommercesystem.ecommerce.entities.Product;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.lang.reflect.Array;
+import java.util.List;
 import java.util.Optional;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called productRepository
@@ -13,5 +15,5 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
   Optional<Product> findByProdName(String prodName);
-//  Optional<Product> findByProdBrand (String prodBrand);
+  Optional<Product> findByProdBrand (String prodBrand);
 }

@@ -60,6 +60,7 @@
         <div class="col-lg-3">
 
           <h1 class="my-4">You have search for: </h1>
+          <h1 th:text="${productName}"/>
 
             <!-- Page Content 2 -->
             <h1></h1>
@@ -94,18 +95,19 @@
             </a>
           </div>
 
-          <div class="row" th:object="${productController}" th:src="@{/search_results}">
+          <div class="row" th:object="${productController}" th:href="@{/search_results}">
 
             <div class="col-lg-4 col-md-6 mb-4">
               <div class="card h-20">
-                <a href="#"><img class="card-img-top" src="/prodImage" th:action="@{/search_results}" th:src="@{/prodImage}" alt="image"></a>
-                <div class="card-body" th:hidden="${ID_product}">
+                <a th:href="@{/item_details}"><img class="card-img-top" th:blob="${prodImage}" alt="image"></a>
+                <div class="card-body">
                   <h4 class="card-title">
-                    <a text="prodName" th:text="${prodName}"/>
+                    <a th:href="@{/item_details}" th:text="${prodName}"/>
                   </h4>
-                  <h5 text="price" th:text="${price}"/>
+                  Rp:
+                  <span  text="price" th:text="${price}"/><br>
                     Category:
-                  <a text="prodName" th:text="${category_name}" name="prodCategory"/>
+                  <a text="category_name" th:text="${category_name}" name="category_name"/>
                 </div>
                 <div class="card-footer">
                   <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
