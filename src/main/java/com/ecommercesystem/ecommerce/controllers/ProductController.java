@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.thymeleaf.context.WebContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +26,6 @@ public class ProductController {
   @Autowired
   ProductRepository productRepository;
 
-//  @Autowired
-//  public void setProductService(ProductService productService){
-//    this.productService = productService;
-//  }
-
   @GetMapping(path = "/")
   public String front() {
     return "index";
@@ -37,39 +33,33 @@ public class ProductController {
 
   @GetMapping(path = "/search_results")
   public String search(@RequestParam(value = "search", required = false) String search, Model model){
-    Optional<Product> productName = productRepository.findByProdName(search);
-    Optional<Product> productBrand = productRepository.findByProdBrand(search);
-    if (productName.isPresent()){
-      if (search.contains(productName.get().getProdName())){
-        model.addAttribute("price", productName.get().getPrice());
-        System.out.println("Price: " + productName.get().getPrice());
-        model.addAttribute("prodName", productName.get().getProdName());
-        System.out.println("Name: " + productName.get().getProdName());
-        model.addAttribute("category_name", productName.get().getCategory().getCategory_name());
-        System.out.println("Category: " + productName.get().getCategory().getCategory_name());
-        model.addAttribute("prodDesc", productName.get().getProdDesc());
-        model.addAttribute("prodImage", productName.get().getProdImage());
-        model.addAttribute("prodBrand", productName.get().getProdBrand());
-      }
-    }
-    else if (productBrand.isPresent()){
-      if (search.contains(productBrand.get().getProdName())){
-        model.addAttribute("price", productBrand.get().getPrice());
-        model.addAttribute("prodName", productBrand.get().getProdName());
-        model.addAttribute("category_name", productBrand.get().getCategory().getCategory_name());
-        model.addAttribute("prodDesc", productBrand.get().getProdDesc());
-        model.addAttribute("prodImage", productBrand.get().getProdImage());
-        model.addAttribute("prodBrand", productBrand.get().getProdBrand());
-      }
-    }
+    List<Product> productList = productRepository.findAll();
+    model.addAttribute("products" , productList);
+//    for (Product product : productList) {
+//      if (product.getProdName().contains(search) || product.getProdBrand().contains(search)){
+//        model.addAttribute("ID_produk: " + product.getID_product());
+//        System.out.println("Product ID: " + product.getID_product());
+//        model.addAttribute("price", product.getPrice());
+//        System.out.println("Price: " + product.getPrice());
+//        model.addAttribute("prodName", product.getProdName());
+//        System.out.println("Name: " + product.getProdName());
+//        model.addAttribute("category_name", product.getCategory().getCategory_name());
+//        System.out.println("Category: " + product.getCategory().getCategory_name());
+//        model.addAttribute("prodDesc", product.getProdDesc());
+//        model.addAttribute("prodImage", product.getProdImage());
+//        model.addAttribute("prodBrand", product.getProdBrand());
+//      }
+//    }
+    //Path variable id
     return "search_results";
   }
 
   @GetMapping(path = "/item_details")
-  public String item(@RequestParam(value = "search") String search, Model model){
+  public String item(String search, Model model){
     Optional<Product> productName = productRepository.findByProdName(search);
     if (productName.isPresent()){
       if (search.equals(productName.get().getProdName())){
+        model.addAttribute("ID_Product", productName.get().getID_product());
         model.addAttribute("price", productName.get().getPrice());
         model.addAttribute("prodName", productName.get().getProdName());
         model.addAttribute("category_name", productName.get().getCategory().getCategory_name());

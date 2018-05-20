@@ -23,7 +23,7 @@
       <div class="container">
         <a class="navbar-brand" href="/">Pasar ITHB</a>
         <select class="navbar-toggle">
-          <link href="/search_results.html" value="category">Category</link>
+          <option value="category">Category</option>
           <option value="elektronik">Elektronik</option>
           <option value="games">Games</option>
           <option value="fashion">Fashion</option>
@@ -35,20 +35,8 @@
                  placeholder="Search for Products and Brands">
           <input id="searchButton" class="navbar-toggler" type="submit" value="Search"/>
         </form>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Your Cart</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Profile</a>
-            </li>
-          </ul>
-        </div>
+        <a th:href="@{/cart}">Your Cart</a>
+        <a th:href="@{/login}">Profile</a>
       </div>
     </nav>
 
@@ -60,7 +48,7 @@
         <div class="col-lg-3">
 
           <h1 class="my-4">You have search for: </h1>
-          <h1 th:text="${productName}"/>
+          <h1 th:text="${search}"/>
 
             <!-- Page Content 2 -->
             <h1></h1>
@@ -97,108 +85,23 @@
 
           <div class="row" th:object="${productController}" th:href="@{/search_results}">
 
-            <div class="col-lg-4 col-md-6 mb-4">
-              <div class="card h-20">
-                <a th:href="@{/item_details}"><img class="card-img-top" th:blob="${prodImage}" alt="image"></a>
-                <div class="card-body">
-                  <h4 class="card-title">
-                    <a th:href="@{/item_details}" th:text="${prodName}"/>
-                  </h4>
-                  Rp:
-                  <span  text="price" th:text="${price}"/><br>
-                    Category:
-                  <a text="category_name" th:text="${category_name}" name="category_name"/>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                </div>
+          <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-20" th:each="product : ${products}">
+              <a th:href="@{/item_details/}" + th:text="${product.ID_product}"><img class="card-img-top" alt="image"></a>
+              <div class="card-body" >
+                <h4 class="card-title" >
+                  <a th:href="@{/item_details}" th:text="${product.prodName}"/>
+                </h4>
+                Rp:
+                <span th:text="${product.price}"/><br>
+                Category:
+                <!--<a th:text="${product.category_name}" name="category_name"/>-->
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
               </div>
             </div>
-
-            <!--<div class="col-lg-4 col-md-6 mb-4">-->
-              <!--<div class="card h-20">-->
-                <!--<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>-->
-                <!--<div class="card-body">-->
-                  <!--<h4 class="card-title">-->
-                    <!--<a href="#">Nama Barang 2</a>-->
-                  <!--</h4>-->
-                  <!--<h5>Rp. 2000</h5>-->
-                    <!--Category:-->
-                  <!--<a href="#" name="prodCategory">Games</a>-->
-                <!--</div>-->
-                <!--<div class="card-footer">-->
-                  <!--<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
-
-            <!--<div class="col-lg-4 col-md-6 mb-4">-->
-              <!--<div class="card h-20">-->
-                <!--<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>-->
-                <!--<div class="card-body">-->
-                  <!--<h4 class="card-title">-->
-                    <!--<a href="#">Nama Barang 3</a>-->
-                  <!--</h4>-->
-                  <!--<h5>Rp. 2000</h5>-->
-                    <!--Category:-->
-                  <!--<a href="#" name="prodCategory">Fashion</a>-->
-                <!--</div>-->
-                <!--<div class="card-footer">-->
-                  <!--<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
-
-            <!--<div class="col-lg-4 col-md-6 mb-4">-->
-              <!--<div class="card h-20">-->
-                <!--<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>-->
-                <!--<div class="card-body">-->
-                  <!--<h4 class="card-title">-->
-                    <!--<a href="#">Nama Barang 4</a>-->
-                  <!--</h4>-->
-                  <!--<h5>Rp. 2000</h5>-->
-                    <!--Category:-->
-                  <!--<a href="#" name="prodCategory">Food</a>-->
-                <!--</div>-->
-                <!--<div class="card-footer">-->
-                  <!--<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
-
-            <!--<div class="col-lg-4 col-md-6 mb-4">-->
-              <!--<div class="card h-20">-->
-                <!--<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>-->
-                <!--<div class="card-body">-->
-                  <!--<h4 class="card-title">-->
-                    <!--<a href="#">Nama Barang 5</a>-->
-                  <!--</h4>-->
-                  <!--<h5>Rp. 2000</h5>-->
-                    <!--Category:-->
-                  <!--<a href="#" name="prodCategory">Olahraga</a>-->
-                <!--</div>-->
-                <!--<div class="card-footer">-->
-                  <!--<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
-
-            <!--<div class="col-lg-4 col-md-6 mb-4">-->
-             <!--<div class="card h-20">-->
-                <!--<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>-->
-                <!--<div class="card-body">-->
-                  <!--<h4 class="card-title">-->
-                    <!--<a href="#">Nama Barang 6</a>-->
-                  <!--</h4>-->
-                  <!--<h5>Rp. 2000</h5>-->
-                    <!--Category:-->
-                  <!--<a href="#" name="prodCategory">Elektronik</a>-->
-                <!--</div>-->
-                <!--<div class="card-footer">-->
-                  <!--<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
+            </div>
 
           </div>
           <!-- /.row -->

@@ -19,8 +19,7 @@ public class Product {
   @NotNull
   private String prodDesc;
 
-  @NotNull
-  private float price;
+  private @NotNull Integer price;
 
   @NotNull
   private String prodBrand;
@@ -36,7 +35,7 @@ public class Product {
 
   protected Product(){}
 
-  public Product(Integer ID_product, @NotNull String prodName, @NotNull String prodDesc, @NotNull float price, @NotNull String prodBrand, @NotNull Blob prodImage, int prodRating, Category category) {
+  public Product(Integer ID_product, @NotNull String prodName, @NotNull String prodDesc, @NotNull Integer price, @NotNull String prodBrand, @NotNull Blob prodImage, int prodRating, Category category) {
     this.ID_product = ID_product;
     this.prodName = prodName;
     this.prodDesc = prodDesc;
@@ -71,11 +70,11 @@ public class Product {
     this.prodDesc = prodDesc;
   }
 
-  public float getPrice() {
+  public Integer getPrice() {
     return price;
   }
 
-  public void setPrice(float price) {
+  public void setPrice(Integer price) {
     this.price = price;
   }
 
