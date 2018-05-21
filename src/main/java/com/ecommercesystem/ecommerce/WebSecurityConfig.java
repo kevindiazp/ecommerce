@@ -1,8 +1,11 @@
 package com.ecommercesystem.ecommerce;
 
-import com.ecommercesystem.ecommerce.repositories.UserRepository;
+//import com.ecommercesystem.ecommerce.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.WebSecurityEnablerConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -14,28 +17,28 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-  @Autowired
-  UserRepository userRepository;
+//  @Autowired
+//  UserRepository userRepository;
 
   @Override
   protected void configure(HttpSecurity http) throws Exception{
-    http
-            .authorizeRequests()
-            .antMatchers("/**").permitAll()
+    http.authorizeRequests().antMatchers("/").permitAll()
+            .and()
+            .authorizeRequests().antMatchers("/cart").hasRole("user")
             .and()
             .formLogin().loginPage("/login").permitAll()
             .and()
-            .logout().permitAll();
+            .logout().permitAll()
+            .and()
+            .csrf().disable();
   }
 
   @Bean
-  @Override
   public UserDetailsService userDetailsService(){
     PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
     InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-    manager.createUser(User.withUsername(userRepository.findByUsername("rheza").get().getUsername())
-            .password(encoder.encode(userRepository.findByUsername("rheza").get().getPassword()))
-            .build());
+    manager.createUser(User.withUsername("rheza").password(encoder.encode("password123")).roles("user").build());
+    manager.createUser(User.withUsername("kevin").password(encoder.encode("terserah")).roles("user").build());
     return manager;
   }
 }
