@@ -36,7 +36,7 @@
           <input id="searchButton" class="navbar-toggler" type="submit" value="Search"/>
         </form>
         <a th:href="@{/cart}">Your Cart</a>
-        <a th:href="@{/login}">Profile</a>
+        <a th:href="@{/profile}">Profile</a>
       </div>
     </nav>
 
@@ -87,10 +87,10 @@
 
           <div class="col-lg-4 col-md-6 mb-4">
               <div class="card h-20" th:each="product : ${products}">
-              <a th:href="@{/item_details/}" + th:text="${product.ID_product}"><img class="card-img-top" alt="image"></a>
+              <a th:href="@{/item_details/{product.ID_Product}}" + th:text="${product.ID_product}"><img class="card-img-top" alt="image"></a>
               <div class="card-body" >
                 <h4 class="card-title" >
-                  <a th:href="@{/item_details}" th:text="${product.prodName}"/>
+                  <a th:href="@{/item_details/{product.ID_Product}}" th:text="${product.prodName}"/>
                 </h4>
                 Rp:
                 <span th:text="${product.price}"/><br>

@@ -18,6 +18,7 @@ public class MvcConfig implements WebMvcConfigurer {
     registry.addViewController("/item_details/{ID_Product}").setViewName("static/ItemDetails/item_details");
     registry.addViewController("/login").setViewName("/login");
     registry.addViewController("/cart").setViewName("/cart");
+    registry.addViewController("/profile").setViewName("/profile");
   }
 
   @Override
