@@ -98,4 +98,15 @@ public class Product {
   public void setCategory(Category category) {
     this.category = category;
   }
+
+  @Override
+  public String toString() {
+    return "product{" +
+            "iDProduct=" + iDProduct +
+            ", name='" + prodName + '\'' +
+            ", price=" + price +
+            ", description='" + prodDesc + '\'' +
+            ", brand='" + prodBrand + '\''+
+            '}';
+  }
 }

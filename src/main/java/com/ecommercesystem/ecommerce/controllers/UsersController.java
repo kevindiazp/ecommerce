@@ -36,11 +36,12 @@ public class UsersController {
     return new ModelAndView("login");
   }
 
-  @GetMapping(path = "/cart/{username}")
-  public String cart(@RequestParam(value = "iDProduct", required = false)Integer iDProduct, Model model){
+  @GetMapping(path = "/cart/{iDProduct}")
+  public String cart(@PathVariable("iDProduct") Integer iDProduct, Model model){
     if(iDProduct != null){
       Optional<Product> product = productRepository.findOneByiDProduct(iDProduct);
-//      if(product.isPresent()){
+      if(product.isPresent()){
+        carts.add(new Cart(product.get()));
         for (Cart cart: carts){
           if (cart.getProduct().getiDProduct().equals(product.get().getiDProduct())){
 
@@ -48,14 +49,14 @@ public class UsersController {
             for (Cart cart1 : carts){
               total += cart1.getAmount();
             }
+            model.addAttribute("product", carts);
             model.addAttribute("total", total);
             return "cart";
           }
         }
-        carts.add(new Cart(product.get()));
       }
-//    }
-    model.addAttribute("item", carts);
+    }
+    model.addAttribute("product", carts);
     total = 0;
     for (Cart cart: carts){
       total += cart.getAmount();

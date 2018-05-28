@@ -86,7 +86,6 @@
           <div class="row" th:object="${productController}" th:href="@{/search_results}">
 
           <div class="col-lg-6 col-md-12 mb-10">
-            <form method="get" th:action="@{/cart/${username}}">
               <div class="card h-20" th:each="product : ${products}">
               <img class="card-img-top" th:src="@{'/images/' + ${product.prodImage}}" alt="image"></a>
               <div class="card-body" >
@@ -99,13 +98,14 @@
                 <span th:text="${product.prodBrand}"/><br>
                 Description:
                 <span th:text="${product.prodDesc}"/><br>
-                <input id="addToCart" class="navbar-toggler" type="submit" value="Add To Cart"/><br>
+                <br>
+                <a th:href="@{'/cart/' + ${product.iDProduct}}" class="btn btn-success btn-block">Add to cart<a>
+
               </div>
               <div class="card-footer">
                 <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
               </div>
               </div>
-            </form>
           </div>
 
           </div>
