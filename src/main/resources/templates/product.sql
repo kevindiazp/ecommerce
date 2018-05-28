@@ -22,14 +22,14 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product`  (
-  `ID_product` int(5) UNSIGNED ZEROFILL NOT NULL,
+  `iDProduct` int(5) UNSIGNED ZEROFILL NOT NULL,
   `prod_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `prod_desc` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `price` integer(10) NOT NULL,
   `prod_image` varchar (25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `prod_brand` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `category_id_category` int(5) NOT NULL,
-  PRIMARY KEY (`ID_product`) USING BTREE,
+  PRIMARY KEY (`iDProduct`) USING BTREE,
   INDEX `ID_category`(`category_id_category`) USING BTREE,
   CONSTRAINT `ID_category` FOREIGN KEY (`category_id_category`) REFERENCES `category` (`ID_category`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
