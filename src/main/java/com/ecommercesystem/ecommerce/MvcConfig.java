@@ -17,8 +17,9 @@ public class MvcConfig implements WebMvcConfigurer {
     registry.addViewController("/search_results").setViewName("static/SearchResult/search_result");
     registry.addViewController("/item_details/{ID_Product}").setViewName("static/ItemDetails/item_details");
     registry.addViewController("/login").setViewName("/login");
-    registry.addViewController("/cart").setViewName("/cart");
+    registry.addViewController("/cart/{username}").setViewName("/cart");
     registry.addViewController("/profile").setViewName("/profile");
+    registry.addViewController("/invoice").setViewName("/invoice");
   }
 
   @Override
@@ -30,6 +31,7 @@ public class MvcConfig implements WebMvcConfigurer {
     ).addResourceLocations(
             "classpath:/static/ItemDetails",
             "classpath:/static/",
-            "classpath:/static/SearchResult");
+            "classpath:/static/SearchResult",
+            "classpath:/static/images");
   }
 }

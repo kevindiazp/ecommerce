@@ -21,7 +21,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lDg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="/">Pasar ITHB</a>
+        <a class="navbar-brand" th:href="@{/}">Pasar ITHB</a>
         <select class="navbar-toggle">
           <option value="category">Category</option>
           <option value="elektronik">Elektronik</option>
@@ -85,23 +85,28 @@
 
           <div class="row" th:object="${productController}" th:href="@{/search_results}">
 
-          <div class="col-lg-4 col-md-6 mb-4">
+          <div class="col-lg-6 col-md-12 mb-10">
+            <form method="get" th:action="@{/cart/${username}}">
               <div class="card h-20" th:each="product : ${products}">
-              <a th:href="@{/item_details/{product.ID_Product}}" + th:text="${product.ID_product}"><img class="card-img-top" alt="image"></a>
+              <img class="card-img-top" th:src="@{'/images/' + ${product.prodImage}}" alt="image"></a>
               <div class="card-body" >
                 <h4 class="card-title" >
-                  <a th:href="@{/item_details/{product.ID_Product}}" th:text="${product.prodName}"/>
+                  <a th:text="${product.prodName}"/>
                 </h4>
                 Rp:
                 <span th:text="${product.price}"/><br>
-                Category:
-                <!--<a th:text="${product.category_name}" name="category_name"/>-->
+                Brand:
+                <span th:text="${product.prodBrand}"/><br>
+                Description:
+                <span th:text="${product.prodDesc}"/><br>
+                <input id="addToCart" class="navbar-toggler" type="submit" value="Add To Cart"/><br>
               </div>
               <div class="card-footer">
                 <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
               </div>
-            </div>
-            </div>
+              </div>
+            </form>
+          </div>
 
           </div>
           <!-- /.row -->

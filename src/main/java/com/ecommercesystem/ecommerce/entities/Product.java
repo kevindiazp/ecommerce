@@ -11,7 +11,7 @@ public class Product {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private Integer ID_product;
+  private Integer iDProduct;
 
   @NotNull
   private String prodName;
@@ -19,39 +19,36 @@ public class Product {
   @NotNull
   private String prodDesc;
 
-  private @NotNull Integer price;
+  @NotNull
+  private Integer price;
 
   @NotNull
   private String prodBrand;
 
   @NotNull
-  private Blob prodImage;
-
-//  @Null
-//  private int prodRating;
+  private String prodImage;
 
   @ManyToOne
   private Category category;
 
   protected Product(){}
 
-  public Product(Integer ID_product, @NotNull String prodName, @NotNull String prodDesc, @NotNull Integer price, @NotNull String prodBrand, @NotNull Blob prodImage, int prodRating, Category category) {
-    this.ID_product = ID_product;
+  public Product(Integer iDProduct, @NotNull String prodName, @NotNull String prodDesc, @NotNull Integer price, @NotNull String prodBrand, @NotNull String prodImage, Category category) {
+    this.iDProduct = iDProduct;
     this.prodName = prodName;
     this.prodDesc = prodDesc;
     this.price = price;
     this.prodBrand = prodBrand;
     this.prodImage = prodImage;
-//    this.prodRating = prodRating;
     this.category = category;
   }
 
-  public Integer getID_product() {
-    return ID_product;
+  public Integer getiDProduct() {
+    return iDProduct;
   }
 
-  public void setID_product(Integer ID_product) {
-    this.ID_product = ID_product;
+  public void setiDProduct(Integer IDProduct) {
+    this.iDProduct = iDProduct;
   }
 
   public String getProdName() {
@@ -86,21 +83,13 @@ public class Product {
     this.prodBrand = prodBrand;
   }
 
-  public Blob getProdImage() {
+  public String getProdImage() {
     return prodImage;
   }
 
-  public void setProdImage(Blob prodImage) {
+  public void setProdImage(String prodImage) {
     this.prodImage = prodImage;
   }
-
-//  public int getProdRating() {
-//    return prodRating;
-//  }
-//
-//  public void setProdRating(int prodRating) {
-//    this.prodRating = prodRating;
-//  }
 
   public Category getCategory() {
     return category;

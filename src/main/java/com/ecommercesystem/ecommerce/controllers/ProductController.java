@@ -8,16 +8,12 @@ import com.ecommercesystem.ecommerce.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.context.WebContext;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
+
 
 @Controller
 public class ProductController {
@@ -33,41 +29,28 @@ public class ProductController {
 
   @GetMapping(path = "/search_results")
   public String search(@RequestParam(value = "search", required = false) String search, Model model){
-    List<Product> productList = productRepository.findAll();
+    List<Product> productList = productRepository.findByProdNameContains(search);
     model.addAttribute("products" , productList);
-//    for (Product product : productList) {
-//      if (product.getProdName().contains(search) || product.getProdBrand().contains(search)){
-//        model.addAttribute("ID_produk: " + product.getID_product());
-//        System.out.println("Product ID: " + product.getID_product());
-//        model.addAttribute("price", product.getPrice());
-//        System.out.println("Price: " + product.getPrice());
-//        model.addAttribute("prodName", product.getProdName());
-//        System.out.println("Name: " + product.getProdName());
-//        model.addAttribute("category_name", product.getCategory().getCategory_name());
-//        System.out.println("Category: " + product.getCategory().getCategory_name());
-//        model.addAttribute("prodDesc", product.getProdDesc());
-//        model.addAttribute("prodImage", product.getProdImage());
-//        model.addAttribute("prodBrand", product.getProdBrand());
-//      }
-//    }
-    //Path variable id
+
+//    List<Product> productList1 = productRepository.findByProdBrandContains(search);
+//    model.addAttribute("product1", productList1);
     return "search_results";
   }
 
-  @GetMapping(path = "/item_details")
-  public String item(String search, Model model){
-    Optional<Product> productName = productRepository.findByProdName(search);
-    if (productName.isPresent()){
-      if (search.equals(productName.get().getProdName())){
-        model.addAttribute("ID_Product", productName.get().getID_product());
-        model.addAttribute("price", productName.get().getPrice());
-        model.addAttribute("prodName", productName.get().getProdName());
-        model.addAttribute("category_name", productName.get().getCategory().getCategory_name());
-        model.addAttribute("prodDesc", productName.get().getProdDesc());
-        model.addAttribute("prodImage", productName.get().getProdImage());
-        model.addAttribute("prodBrand", productName.get().getProdBrand());
-      }
-    }
+  @GetMapping(path = "/item_details/{ID_product}")
+  public String item(@PathVariable String ID_product, Model model){
+//    Product product= productRepository.findByID_product(ID_product);
+//    model.addAttribute("products" , product);
+//    Optional<Product> productName = productRepository.findByProdName(ID_product);
+//    if (productName.isPresent()){
+//      model.addAttribute("ID_Product", productName.get().getID_product());
+//      model.addAttribute("price", productName.get().getPrice());
+//      model.addAttribute("prodName", productName.get().getProdName());
+//      model.addAttribute("category_name", productName.get().getCategory().getCategory_name());
+//      model.addAttribute("prodDesc", productName.get().getProdDesc());
+//      model.addAttribute("prodImage", productName.get().getProdImage());
+//      model.addAttribute("prodBrand", productName.get().getProdBrand());
+//    }
     return "item_details";
   }
 }
