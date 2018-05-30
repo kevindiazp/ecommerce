@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "user")
-public class Users implements Serializable{
+public class Users{
   @Id
   @NotNull
   private String username;

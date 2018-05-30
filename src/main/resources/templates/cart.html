@@ -19,25 +19,25 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td th:each="cart : ${product}">
+						<tr th:each="cart : ${product}">
+							<td>
 								<div class="row">
-									<div class="col-sm-2 hidden-xs"><img th:src="@{/images/cart.product.prodImage}" alt="..." class="img-responsive"/></div>
+									<div class="col-sm-2 hidden-xs"><img th:src="@{'/images/' + ${cart.product.prodImage}}" alt="..." class="img-responsive"/></div>
 									<div class="col-sm-10">
 										<h4 class="nomargin" th:text="${cart.product.prodName}">Product 1</h4>
 									</div>
 								</div>
 							</td>
-							<td th:text="${cart.product.price}">$1.99</td>
-							<td th:text="${cart.quantity}">
+							<td th:text="${cart.amount}">$1.99</td>
+							<!--<td><a th:href="@{'/cart/subtract/' + ${cart.product.iDProduct}}" >-->
+								<!--<i class="fa fa-minus-square-o"></i>-->
+							<!--</a></td>-->
+							<td><span th:text="${quantity}">th:text="${quantity}"</span></td>
+							<!--<td><a th:href="@{'/cart/add/' + ${cart.product.iDProduct}}" >-->
+								<!--<i class="fa fa-plus-square-o"></i>-->
+							<!--</a></td>-->
 						</td>
-							<td><a th:href="@{'/user/add/' + ${cart.product.iDProduct}}" >
-								<i class="fa fa-plus-square-o"></i>
-							</a></td>
-							<td><a th:href="@{'/user/subtract/' + ${cart.product.iDProduct}}" >
-								<i class="fa fa-minus-square-o"></i>
-							</a></td>
-							<td data-th="Subtotal" class="text-center">1.99</td>
+							<td data-th="Subtotal" class="text-center" th:text="${total}">1.99</td>
 						</tr>
 					</tbody>
 					<tfoot>

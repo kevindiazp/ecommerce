@@ -1,6 +1,8 @@
 package com.ecommercesystem.ecommerce.controllers;
 
+import com.ecommercesystem.ecommerce.entities.Invoice;
 import com.ecommercesystem.ecommerce.entities.Product;
+import com.ecommercesystem.ecommerce.entities.Users;
 import com.ecommercesystem.ecommerce.repositories.InvoiceRepository;
 import com.ecommercesystem.ecommerce.repositories.ProductRepository;
 import com.ecommercesystem.ecommerce.repositories.UsersRepository;
@@ -20,6 +22,9 @@ import java.util.Optional;
 public class UsersController {
 
   @Autowired
+  UsersRepository usersRepository;
+
+  @Autowired
   ProductRepository productRepository;
 
   @Autowired
@@ -27,6 +32,8 @@ public class UsersController {
 
   ArrayList<Cart> carts = new ArrayList<>();
   int total;
+  int quantity;
+  int amount;
 
   @GetMapping(path = "/login")
   public ModelAndView logout(@RequestParam(name = "logout", required=false) String logout) {
@@ -40,16 +47,21 @@ public class UsersController {
   public String cart(@PathVariable("iDProduct") Integer iDProduct, Model model){
     if(iDProduct != null){
       Optional<Product> product = productRepository.findOneByiDProduct(iDProduct);
+//        Optional<Users> users = usersRepository.findByUsername(username);
       if(product.isPresent()){
         carts.add(new Cart(product.get()));
+        total = 0;
+        quantity = 0;
         for (Cart cart: carts){
           if (cart.getProduct().getiDProduct().equals(product.get().getiDProduct())){
-
-            total = 0;
+            amount = product.get().getPrice();
+            quantity = cart.getQuantity();
             for (Cart cart1 : carts){
               total += cart1.getAmount();
             }
             model.addAttribute("product", carts);
+            model.addAttribute("quantity", quantity);
+            model.addAttribute("amount", amount);
             model.addAttribute("total", total);
             return "cart";
           }
@@ -65,37 +77,47 @@ public class UsersController {
     return "cart";
   }
 
-  @GetMapping(path = "/cart/add{iDProduct}")
-  public String add(@PathVariable("iDProduct") Integer iDProduct, Model model){
-    for (Cart cart : carts){
-      if(cart.getProduct().getiDProduct().equals(iDProduct)){
-        cart.incrementQuantity();
-        break;
-      }
-    }
-    model.addAttribute("product", carts);
-    total = 0;
-    for (Cart cart : carts){
-      total += cart.getAmount();
-    }
-    model.addAttribute("total", total);
-    return "cart";
+  @GetMapping(path = "/invoice/{id}")
+  public String invoice(@RequestParam("iDProduct") Integer iDProduct, Model model){
+    return "invoice";
   }
 
-  @GetMapping(path = "/cart/subtract{iDProduct}")
-  public String subtract(@PathVariable("iDProduct") Integer iDProduct, Model model){
-    for (Cart cart : carts){
-      if(cart.getProduct().getiDProduct().equals(iDProduct)){
-        cart.decrementQuantity();
-        break;
-      }
-    }
-    model.addAttribute("product", carts);
-    total = 0;
-    for (Cart cart : carts){
-      total += cart.getAmount();
-    }
-    model.addAttribute("total", total);
-    return "cart";
-  }
+//  @GetMapping(path = "/cart/add/{iDProduct}")
+//  public String add(@PathVariable("iDProduct") Integer iDProduct, Model model){
+//    Optional<Product> product = productRepository.findOneByiDProduct(iDProduct);
+//    if(product.isPresent()){
+//      total = 0;
+//      quantity = 0;
+//      amount = product.get().getPrice();
+//
+//      model.addAttribute("product", carts);
+//      for (Cart cart : carts){
+//        quantity =+ cart.getQuantity();
+//        total += cart.getAmount();
+//      }
+//      model.addAttribute("total", total);
+//      model.addAttribute("amount", amount);
+//      model.addAttribute("quantity", quantity);
+//    }
+//    return "cart";
+//  }
+//
+//  @GetMapping(path = "/cart/subtract/{iDProduct}")
+//  public String subtract(@PathVariable("iDProduct") Integer iDProduct, Model model){
+//    Optional<Product> product = productRepository.findOneByiDProduct(iDProduct);
+//    if(product.isPresent()){
+//      total = 0;
+//      quantity = 0;
+//      amount = product.get().getPrice();
+//      model.addAttribute("product", carts);
+//      for (Cart cart : carts){
+//        quantity =- cart.getQuantity();
+//        total -= cart.getAmount();
+//      }
+//      model.addAttribute("total", total);
+//      model.addAttribute("amount", amount);
+//      model.addAttribute("quantity", quantity);
+//    }
+//    return "cart";
+//  }
 }

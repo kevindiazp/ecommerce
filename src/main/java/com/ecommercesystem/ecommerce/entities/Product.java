@@ -47,7 +47,7 @@ public class Product {
     return iDProduct;
   }
 
-  public void setiDProduct(Integer IDProduct) {
+  public void setiDProduct(Integer iDProduct) {
     this.iDProduct = iDProduct;
   }
 

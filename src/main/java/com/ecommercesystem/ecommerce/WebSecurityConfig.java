@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception{
     http.authorizeRequests().antMatchers("/").permitAll()
             .and()
-            .authorizeRequests().antMatchers("/cart").hasRole("user")
+            .authorizeRequests().antMatchers("/cart/{iDProduct}").hasRole("user")
             .and()
             .authorizeRequests().antMatchers("/profile").hasRole("user")
             .and()

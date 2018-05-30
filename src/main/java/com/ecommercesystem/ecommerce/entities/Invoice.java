@@ -18,17 +18,17 @@ public class Invoice implements Serializable {
   private String username;
 
   @NotNull
-  private int amount;
+  private int quantity;
 
   @NotNull
   private long total_price;
 
   protected Invoice(){}
 
-  public Invoice(int id, @NotNull String username, @NotNull int amount, @NotNull long total_price) {
+  public Invoice(int id, @NotNull String username, @NotNull int quantity, @NotNull long total_price) {
     this.id = id;
     this.username = username;
-    this.amount = amount;
+    this.quantity = quantity;
     this.total_price = total_price;
   }
 
@@ -48,12 +48,12 @@ public class Invoice implements Serializable {
     this.username = username;
   }
 
-  public int getAmount() {
-    return amount;
+  public int getQuantity() {
+    return quantity;
   }
 
-  public void setAmount(int amount) {
-    this.amount = amount;
+  public void setQuantity(int quantity) {
+    this.quantity = quantity;
   }
 
   public long getTotal_price() {
@@ -69,7 +69,7 @@ public class Invoice implements Serializable {
     return "Invoice{" +
             "id= " + id +
             ", username= '" + username + '\'' +
-            ", amount= " + amount +
+            ", quantity= " + quantity +
             ", total_price= " + total_price +
             '}';
   }
