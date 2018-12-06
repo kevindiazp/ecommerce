@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8">
-    <title>Example 1</title>
+    <title>Invoice</title>
     <link rel="stylesheet" th:href="@{/invoice-style.css}" media="all" />
   </head>
   <body>
@@ -16,31 +16,27 @@
         <div>Jl. Dipati Ukur 80-84<br /> Bandung 40226, ID</div>
         <div>022 250 6636</div>
       </div>
-      <div id="project">
-        <div><span>INVOICE ID</span> </div>
-        <div><span>USERNAME</span> John Doe</div>
-      </div>
     </header>
     <main>
-      <table>
+      <table th:object="${userController}">
         <thead>
           <tr>
-            <th class="desc">DESCRIPTION</th>
+            <th class="desc">PRODUCT NAME</th>
             <th>PRICE</th>
             <th>QTY</th>
             <th>TOTAL</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-			<td class="desc">Creating a recognizable design solution based on the company's existing visual identity</td>
-            <td class="unit">$40.00</td>
-            <td class="qty">26</td>
-            <td class="total"/>
+          <tr th:each="cart : ${product}">
+            <td class="desc" th:text="${cart.product.prodName}">Creating a recognizable design solution based on the company's existing visual identity</td>
+            <td class="unit" th:text="${'Rp. ' + cart.amount}">$40.00</td>
+            <td class="qty" th:text="${quantity}">26</td>
+            <td class="total" th:text="${'Rp. ' + cart.amount}">xxx</td>
           </tr>
           <tr>
             <td colspan="4" class="grand total">GRAND TOTAL</td>
-            <td class="grand total"/>
+            <td class="grand total" th:text="${'Rp. ' + total}">xxx</td>
           </tr>
         </tbody>
       </table>

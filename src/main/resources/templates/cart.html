@@ -7,15 +7,13 @@
 
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
-	<table id="cart" class="table table-hover table-condensed">
-		<form method="post" th:action="@{/invoice}" th:object="${userController}">
+	<table id="cart" class="table table-hover table-condensed" th:object="${userController}">
     				<thead>
 						<tr>
 							<th style="width:50%">Product</th>
-							<th style="width:10%">Price</th>
-							<th style="width:8%">Quantity</th>
-							<th style="width:22%" class="text-center">Subtotal</th>
-							<th style="width:10%"></th>
+							<th style="width:25%">Price</th>
+							<th style="width:15%">Quantity</th>
+							<th style="width:35%">Subtotal</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -28,16 +26,16 @@
 									</div>
 								</div>
 							</td>
-							<td th:text="${cart.amount}">$1.99</td>
+							<td th:text="${'Rp. ' + cart.amount}">$1.99</td>
 							<!--<td><a th:href="@{'/cart/subtract/' + ${cart.product.iDProduct}}" >-->
 								<!--<i class="fa fa-minus-square-o"></i>-->
 							<!--</a></td>-->
-							<td><span th:text="${quantity}">th:text="${quantity}"</span></td>
+							<td><span th:text="${quantity}">1</span></td>
 							<!--<td><a th:href="@{'/cart/add/' + ${cart.product.iDProduct}}" >-->
 								<!--<i class="fa fa-plus-square-o"></i>-->
 							<!--</a></td>-->
 						</td>
-							<td data-th="Subtotal" class="text-center" th:text="${total}">1.99</td>
+							<td data-th="Subtotal" th:text="${'Rp. ' + cart.amount}">1.99</td>
 						</tr>
 					</tbody>
 					<tfoot>
@@ -46,9 +44,8 @@
 							<td colspan="2" class="hidden-xs"></td>
 							<td class="hidden-xs text-center"><strong>Total Rp. </strong></td>
 							<td class="hidden-xs text-center"><strong th:text="${total}">xxx</strong></td>
-							<td><a th:href="@{/invoice}" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+							<td><a th:href="@{'/invoice/' + ${iDProduct}}" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
 						</tr>
 					</tfoot>
-		</form>
 	</table>
 </div>

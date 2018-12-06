@@ -56,7 +56,7 @@ public class Users{
     return "user{"+
             "username='" + username + '\'' +
             ", password='" + password + '\'' +
-            ", role='" + role + '\'' +
+            ", role='" + role+ '\'' +
             '}';
-  }
+    }
 }

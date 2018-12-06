@@ -77,8 +77,27 @@ public class UsersController {
     return "cart";
   }
 
-  @GetMapping(path = "/invoice/{id}")
-  public String invoice(@RequestParam("iDProduct") Integer iDProduct, Model model){
+  @GetMapping(path = "/invoice/{iDProduct}")
+    public String invoice(@PathVariable("iDProduct") Integer iDProduct, Model model){
+    if(iDProduct != null){
+      Optional<Product> product = productRepository.findOneByiDProduct(iDProduct);
+      if (product.isPresent()){
+        carts.add(new Cart(product.get()));
+        total = 0;
+        quantity = 0;
+
+        for (Cart cart2: carts){
+          amount = product.get().getPrice();
+          quantity = cart2.getQuantity();
+          total += cart2.getAmount()/2;
+        }
+        model.addAttribute("product", carts);
+        model.addAttribute("quantity", quantity);
+        model.addAttribute("amount", amount);
+        model.addAttribute("total", total);
+        return "invoice";
+      }
+    }
     return "invoice";
   }
 
