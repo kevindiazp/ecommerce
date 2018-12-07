@@ -1,5 +1,5 @@
-FROM openjdk:8
-ADD target/movie-engine.jar movie-engine.jar
-EXPOSE 80
-ENTRYPOINT [“java”, “-jar”, “movie-engine.jar”]
-docker build -t microservice-demo
+FROM openjdk:8-jdk-alpine
+VOLUME /tmp
+ARG EcommerceApplication
+ADD ${EcommerceApplication} hello-spring-boot-docker-0.0.1-SNAPSHOT.jar
+ENTRYPOINT [“java”,”-Djava.security.egd=file:/dev/./urandom”,”-jar”,”/hello-spring-boot-docker-0.0.1-SNAPSHOT.jar”]
