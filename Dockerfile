@@ -1,5 +1,5 @@
-FROM openjdk:8-jdk-alpine
+FROM java:8
 VOLUME /tmp
-ARG EcommerceApplication
-ADD ${EcommerceApplication} hello-spring-boot-docker-0.0.1-SNAPSHOT.jar
-ENTRYPOINT [“java”,”-Djava.security.egd=file:/dev/./urandom”,”-jar”,”/hello-spring-boot-docker-0.0.1-SNAPSHOT.jar”]
+EXPOSE 8080
+ADD /target/ecommerce-0.1.0-SNAPSHOT.jar ecommerce-0.1.0-SNAPSHOT.jar
+ENTRYPOINT ["java","-jar","ecommerce-0.1.0-SNAPSHOT.jar"]
